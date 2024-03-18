@@ -1,0 +1,52 @@
+<head>
+    <!-- Autres éléments du head comme le titre, les métadonnées, etc. -->
+    <link rel="stylesheet" href="style.css">
+  </head>
+  
+<div id="app">
+    <div class="demo-description">
+      <h2>Youtube Subtitles</h2>
+      <span>To protect your credentials.</span>
+      <br>
+      <span>DO NOT save this API Key in the code sandbox!!</span>
+    </div>
+    <div class="test-area">
+      <div class="input-area">
+        <label for="api-key">API Key</label>
+        <input
+          id="api-key"
+          type="text"
+          placeholder="Input your key here"
+          v-model="apikey"
+        >
+        <br>
+        <label for="video-id">Video Id</label>
+        <input type="text" 
+          id="video-id" 
+          placeholder="Input the video id here" 
+          v-model="videoId"
+        >
+        <br>
+        <template v-if="returnedSubtitles == true">
+          <label for="language">Language</label>
+          <select id="language" v-model="langIndex" v-html="availableLangs"/>
+          <br>
+        </template>
+        <button v-on:click="downloadSubtitles">Get Subtitles</button>
+      </div>
+   
+      <div class="output-area">
+        <template v-if="error">
+          <div v-html="error" />
+        </template>
+        <template v-else-if="!result">
+          <div>
+            Enter an API Key, Video Id, then press "Get Subtitles".
+          </div>
+        </template>
+        <template v-else>
+          <div v-html="result"/>
+        </template>
+      </div>
+    </div>
+  </div>
